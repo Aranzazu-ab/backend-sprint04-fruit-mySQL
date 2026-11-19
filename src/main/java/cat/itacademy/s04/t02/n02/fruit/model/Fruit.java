@@ -1,9 +1,6 @@
 package cat.itacademy.s04.t02.n02.fruit.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +12,13 @@ import lombok.NoArgsConstructor;
 public class Fruit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int weightInKg;
-    private String provider;
+
+
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    private Provider provider;
 }
