@@ -68,9 +68,16 @@ public class ProviderServiceImpl implements ProviderService{
         return providerMapper.toDto(providerRepository.save(provider));
     }
 
-//    @Override
-//    public void deleteProvider(Long id) {
-//        Provider provider=providerRepository.findById(id)
-//                .orElseThrow(() -> new  ProviderNotFoundException("Provider with id: " +id +" not found."));
-//
+    @Override
+    public void deleteProvider(Long id) {
+        Provider provider=providerRepository.findById(id)
+                .orElseThrow(() -> new  ProviderNotFoundException("Provider with id: " +id +" not found."));
+
+        if (fruitRepository.existsByProviderId(id)){
+        throw new ProviderHasFruitsException("Can't be deleted because provider has associated fruits.");
+        }
+
+        providerRepository.delete(provider);
+    }
+
 }
