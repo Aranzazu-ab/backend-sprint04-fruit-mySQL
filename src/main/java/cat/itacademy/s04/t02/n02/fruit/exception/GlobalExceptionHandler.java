@@ -12,6 +12,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>>
     handleValidationExceptions(MethodArgumentNotValidException exception){
@@ -32,9 +33,34 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(FruitNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleFruitNotFound(FruitNotFoundException ex) {
         Map<String, Object> response = new HashMap<>();
-        response.put("status", HttpStatus.NOT_FOUND.value()); // 404
+        response.put("status", HttpStatus.NOT_FOUND.value());
         response.put("message", ex.getMessage());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
+
+    @ExceptionHandler(ProviderNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handlerProviderNotFound(ProviderNotFoundException ex){
+       Map<String, Object> response = new HashMap<>();
+       response.put("status", HttpStatus.NOT_FOUND.value());
+       response.put("message", ex.getMessage());
+       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(ProviderAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handlerProviderAlreadyExists(ProviderAlreadyExistsException ex){
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("message", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(ProviderHasFruitsException.class)
+    public ResponseEntity<Map<String, Object>> handlerProviderHasFruits(ProviderHasFruitsException ex){
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("message", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
 }
