@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record FruitRequestDto(
-        @NotBlank (message = "name is required")
+        @NotBlank (message = "fruit name is required")
         String name,
 
-        @NotNull (message = "weight in kg can't be null")
-        @Positive (message = "weight in kg must be positive")
+        @NotNull (message = " fruit weight in kg can't be null")
+        @Positive (message = "fruit weight in kg must be positive")
         Integer weightInKg
 ) {
 }
