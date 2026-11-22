@@ -5,6 +5,7 @@ import cat.itacademy.s04.t02.n02.fruit.dto.FruitResponseDto;
 import cat.itacademy.s04.t02.n02.fruit.exception.FruitNotFoundException;
 import cat.itacademy.s04.t02.n02.fruit.model.Fruit;
 import cat.itacademy.s04.t02.n02.fruit.repository.FruitRepository;
+import cat.itacademy.s04.t02.n02.fruit.repository.ProviderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,6 +68,11 @@ public class FruitServiceImpl implements FruitService {
                 .orElseThrow(() -> new FruitNotFoundException("Fruit not found with id: " + id));
 
         fruitRepository.delete(fruit);
+    }
+
+    @Override
+    public List<FruitResponseDto> getFruitsByProviderId(Long providerId) {
+        return List.of();
     }
 
 }

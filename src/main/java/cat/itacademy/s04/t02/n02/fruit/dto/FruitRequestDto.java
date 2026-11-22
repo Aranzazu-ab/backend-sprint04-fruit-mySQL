@@ -10,7 +10,10 @@ public record FruitRequestDto(
 
         @NotNull (message = " fruit weight in kg can't be null")
         @Positive (message = "fruit weight in kg must be positive")
-        Integer weightInKg
+        Integer weightInKg,
+
+        @NotNull(message = "provider Id is required")
+        Long providerId
 ) {
 }
 

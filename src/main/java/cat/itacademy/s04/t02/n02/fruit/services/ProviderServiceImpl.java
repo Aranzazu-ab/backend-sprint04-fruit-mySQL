@@ -49,11 +49,7 @@ public class ProviderServiceImpl implements ProviderService{
         Provider provider = providerRepository.findById(id)
                 .orElseThrow(()-> new ProviderNotFoundException("Provider with id: " +id +" not found."));
 
-        return providerMapper.toDto(provider)
-
-
-
-
+        return providerMapper.toDto(provider);
     }
 
     @Override
@@ -72,11 +68,9 @@ public class ProviderServiceImpl implements ProviderService{
         return providerMapper.toDto(providerRepository.save(provider));
     }
 
-    @Override
-    public void deleteProvider(Long id) {
+//    @Override
+//    public void deleteProvider(Long id) {
 //        Provider provider=providerRepository.findById(id)
 //                .orElseThrow(() -> new  ProviderNotFoundException("Provider with id: " +id +" not found."));
 //
-
-    }
 }

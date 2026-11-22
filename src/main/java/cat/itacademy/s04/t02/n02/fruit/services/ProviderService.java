@@ -10,5 +10,5 @@ public interface ProviderService {
     List<ProviderResponseDto> getAllProviders();
     ProviderResponseDto getProviderById (Long id);
     ProviderResponseDto updateProvider ( Long id, ProviderRequestDto requestDto);
-    void deleteProvider (Long id);
+//    void deleteProvider (Long id);
 }
