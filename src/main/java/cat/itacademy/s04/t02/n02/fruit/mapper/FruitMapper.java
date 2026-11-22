@@ -19,10 +19,11 @@ public class FruitMapper {
         );
     }
 
-    public Fruit toEntity (FruitRequestDto requestDto){
+    public Fruit toEntity (FruitRequestDto requestDto, Provider provider){
         Fruit fruit = new Fruit();
         fruit.setName(requestDto.name());
         fruit.setWeightInKg(requestDto.weightInKg());
+        fruit.setProvider(provider);
         return fruit;
     }
 }
