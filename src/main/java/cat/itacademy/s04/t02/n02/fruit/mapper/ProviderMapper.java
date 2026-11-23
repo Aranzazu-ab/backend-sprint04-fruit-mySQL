@@ -3,7 +3,9 @@ package cat.itacademy.s04.t02.n02.fruit.mapper;
 import cat.itacademy.s04.t02.n02.fruit.dto.ProviderRequestDto;
 import cat.itacademy.s04.t02.n02.fruit.dto.ProviderResponseDto;
 import cat.itacademy.s04.t02.n02.fruit.model.Provider;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProviderMapper {
 
     public ProviderResponseDto toDto (Provider provider){

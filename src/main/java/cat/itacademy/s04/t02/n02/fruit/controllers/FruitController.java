@@ -28,9 +28,12 @@ public class FruitController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FruitResponseDto>> getAllFruits(){
-        List<FruitResponseDto> fruits = fruitService.getAllFruits();
-        return ResponseEntity.ok(fruits);
+    public ResponseEntity<List<FruitResponseDto>> getAllFruits(@RequestParam(required = false) Long providerId){
+        if (providerId != null){
+            return ResponseEntity.ok(fruitService.getFruitsByProviderId(providerId));
+        }
+
+        return ResponseEntity.ok(fruitService.getAllFruits());
     }
 
     @GetMapping ("/{id}")
