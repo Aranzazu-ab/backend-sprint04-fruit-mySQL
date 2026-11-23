@@ -1,9 +1,8 @@
-version: '3.8'
-
 services:
   mysql-db:
     image: mysql:8.0
     container_name: fruit_mysql_db
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: fruit_db
@@ -11,6 +10,29 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  fruit-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fruit_api_app
+    restart: on-failure
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/fruit_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
 volumes:
   mysql_data:
